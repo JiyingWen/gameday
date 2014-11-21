@@ -6,7 +6,10 @@ Description: Query live.nhle.com to check if your NHL team is listed on the
     teams that play today
 Depends:
     R (>= 3.1.1),
-    RCurl (>= 1.95)
+Imports:
+    RCurl,
+    assertthat,
+    jsonlite
 License: CC0
 LazyData: true
 Suggests:

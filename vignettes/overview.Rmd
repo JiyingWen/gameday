@@ -9,54 +9,74 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-I did this.:)
+## Introduction
 
-Made some changes
+The package has two main functions: `gday(team, date)` and `scores(date)`. `gday()` provides an easy way to check whether your favorite NHL team has a game today (or any other days) or not, `scores()` can offer you the score information for all the games on a certain day.
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+The package can be installed using `devtools` from `github` repository.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` setion of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+devtools::install_github("JiyingWen/gameday")
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+## Usage
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+We need to load the package first.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r}
+library(gameday)
 ```
 
-Also a quote using `>`:
+### gday()
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+The default of `gday()` is to check if Vancouver Canucks has a game on `Sys.Date`(today).
+
+```{r}
+# check whether Canucks has a game today
+gday()
+```
+
+We can also check any other teams we are interested in.
+
+```{r}
+# check whether New York Rangers plays tomorrow
+gday("rangers", Sys.Date() + 1)
+```
+
+We can specify the date using format "YYYY-MM-DD"
+```{r}
+# check whether Boston Bruins plays on Nov. 25, 2014
+gday("Bruins", "2014-11-25")
+```
+
+### scores()
+The default of `scores()` is to return a `data.frame` with information of games on `Sys.Date` (today).
+```{r}
+# check the scores today
+scores()
+```
+Of course we can specify the date using `YYYY-MM-DD` format.
+```{r}
+# check the scores on Nov.18, 2014
+scores("2014-11-18")
+```
+
+Also we can use the information returned by `scores()` to get some insights.
+
+We can filter out the games that have ended and get the number of total shots in each game.
+```{r}
+# load dplyr package
+suppressPackageStartupMessages(library(dplyr))
+#filter out the games that have ended and calculate total shots
+shots <- scores() %>%
+	filter(game_status == 5) %>%
+	mutate(total_shots = home_shots + away_shots)
+```
+
+```{r results='asis'}
+library(knitr)
+
+kable(shots, format = "html")
+
+```
+
