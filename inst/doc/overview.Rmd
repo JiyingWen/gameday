@@ -13,6 +13,12 @@ vignette: >
 
 The package has two main functions: `gday(team, date)` and `scores(date)`. `gday()` provides an easy way to check whether your favorite NHL team has a game today (or any other days) or not, `scores()` can offer you the score information for all the games on a certain day.
 
+The package can be installed using `devtools` from `github` repository.
+
+```{r}
+#devtools::install_github("JiyingWen/gameday")
+```
+
 ## Usage
 
 We need to load the package first.
@@ -60,8 +66,8 @@ We can filter out the games that have ended and get the number of total shots in
 ```{r}
 # load dplyr package
 suppressPackageStartupMessages(library(dplyr))
-# filter out the games that have ended and calculate total shots
-shots <- as.data.frame(scores()) %>%
+#filter out the games that have ended and calculate total shots
+shots <- scores() %>%
 	filter(game_status == 5) %>%
 	mutate(total_shots = home_shots + away_shots) %>%
 	select(home, away, home_score, away_score, total_shots)

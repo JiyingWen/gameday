@@ -9,7 +9,8 @@ Depends:
 Imports:
     RCurl,
     assertthat,
-    jsonlite
+    jsonlite,
+    stats
 License: CC0
 LazyData: true
 Suggests:
