@@ -18,6 +18,5 @@ data you want to know.
 }
 \examples{
 scores("2014-11-19")
-scores("2012-12-12")
 }
 
