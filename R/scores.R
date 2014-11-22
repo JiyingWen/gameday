@@ -3,9 +3,9 @@
 #' This function returns a data.frame with information about the games on a particular
 #' data you want to know.
 #'
-#' @param date the date you want to know the scores, format as "YYYY-MM-DD"
-#' @return a data.frame with variables: \code{home}, \code{away}, \code{home_score},
-#' \code{away_score}.
+#' @param date The date you want to know the scores, format as "YYYY-MM-DD", default is \code{Sys.Date()}.
+#' @return a \code{data.frame} with variables: \code{home}, \code{away}, \code{home_score},
+#' \code{away_score}, \code{game_status}, \code{home_shots}, \code{away_shots}.
 #' @export
 #' @examples
 #' scores("2014-11-19")

@@ -1,0 +1,40 @@
+---
+output:
+  html_document:
+    keep_md: yes
+---
+## gameday
+
+`gameday` package provides  an easy way to check whether your favorite NHL team has a game today (or any other days) or not, and also can offer you the score information for all the games on a certain day.
+
+### Installation
+
+The packages can be installed from `github`.
+```{r eval= FALSE}
+# install from github
+library("devtools")
+install_github("JiyingWen/gameday")
+```
+
+### Usage
+There are two main functions in current version: `gday(team, date)` and `scores(date)`.
+
+For example, we want to know whether Montreal Canadiens has a game on "2014-11-25", we can call `gday(team, date)`:
+```{r}
+# load package
+library(gameday)
+
+gday("canadiens", "2014-11-25")
+```
+
+We also want to know the scores of all the games played on "2014-11-20", we can call `scores(date)`:
+```{r}
+scores("2014-11-20")
+```
+
+### Vignette
+A more detailed description of `gameday` package can be found in the vignette. To view it, run the following `R` code in the console.
+```{r eval = FALSE}
+browseVignettes("gameday")
+```
+

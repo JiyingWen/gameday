@@ -6,10 +6,12 @@
 gday(team = "canucks", date = Sys.Date())
 }
 \arguments{
-\item{team}{The name of your team; date}
+\item{team}{The name of your team, with the default "Vancouver Canucks".}
+
+\item{date}{The date of the game, format"YYYY-MM-DD", default is Sys.Date().}
 }
 \value{
-Logical \code{TRUE} if \code{name} has an NHL game today
+Logical \code{TRUE} if \code{team} has an NHL game today
 \code{FALSE} otherwise
 }
 \description{

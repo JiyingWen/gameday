@@ -10,8 +10,9 @@
 #' by firing up your web browser.
 #'
 #'@importFrom RCurl getURL
-#' @param team The name of your team; date
-#' @return Logical \code{TRUE} if \code{name} has an NHL game today
+#' @param team The name of your team, with the default "Vancouver Canucks".
+#' @param date The date of the game, format"YYYY-MM-DD", default is Sys.Date().
+#' @return Logical \code{TRUE} if \code{team} has an NHL game today
 #' \code{FALSE} otherwise
 #' @note case in \code{team} is ignored
 #' @export
